@@ -1,7 +1,7 @@
 const cardContainer = document.querySelector(".memo-cards")
-const colors = ["aqua", "crimson", "green"]
-const colorsPicklist = [...colors, ...colors]
-const cardCount = colorsPicklist.length
+const memoObj = ["aqua", "crimson", "green"]
+const memoObjsPicklist = [...memoObj, ...memoObj]
+const cardCount = memoObjsPicklist.length
 
 // Game state
 
@@ -9,11 +9,11 @@ let revealCount = 0
 let activeCard = null
 let awaitingEndOfMove = false
 
-function buildCard(color) {
+function buildCard(memoObj) {
   const element = document.createElement("div")
 
   element.classList.add("card")
-  element.setAttribute("data-color", color);
+  element.setAttribute("data-memoObj", memoObj);
   element.setAttribute("data-revealed", "false")
 
   element.addEventListener("click", () => {
@@ -22,7 +22,7 @@ function buildCard(color) {
 
     if (awaitingEndOfMove || revealed === "true" || element === activeCard) return;
 
-    element.style.backgroundColor = color;
+    element.style.backgroundColor = memoObj;
 
     if (!activeCard) {
       activeCard = element;
@@ -30,9 +30,9 @@ function buildCard(color) {
       return;
     }
 
-    const cardToMatch = activeCard.getAttribute("data-color");
+    const cardToMatch = activeCard.getAttribute("data-memoObj");
 
-    if (cardToMatch === color) {
+    if (cardToMatch === memoObj) {
       activeCard.setAttribute("data-revealed", "true")
       element.setAttribute("data-revealed", "true")
       awaitingEndOfMove = false
@@ -62,11 +62,11 @@ function buildCard(color) {
 
 // Randomize
 for (let i = 0; i < cardCount; i++) {
-  const randomIndex = Math.floor(Math.random() * colorsPicklist.length)
-  const color = colorsPicklist[randomIndex]
-  const card = buildCard(color)
+  const randomIndex = Math.floor(Math.random() * memoObjsPicklist.length)
+  const memoObj = memoObjsPicklist[randomIndex]
+  const card = buildCard(memoObj)
 
-  colorsPicklist.splice(randomIndex, 1)
+  memoObjsPicklist.splice(randomIndex, 1)
   cardContainer.appendChild(card) 
 }
 
