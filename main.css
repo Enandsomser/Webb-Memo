@@ -3,7 +3,7 @@ body {
     margin: 0;
 }
 
-.memo-card {
+.memo-cards {
     margin: 48px auto;
     width: max-content;
     display: grid;
